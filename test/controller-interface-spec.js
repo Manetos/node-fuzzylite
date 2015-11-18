@@ -48,8 +48,31 @@ describe('controller-interface', function() {
         this.controllerInterface.runController([0.1, 0.2],
             function(err, result) {
                 assert(self.process.exec.calledOnce);
+                // FIXME this should probably be assert.equal
                 assert(result, expectedResult);
                 done();
         });
     });
+
+    it('should have no issue ignoring lines starting with #', function(done) {
+        var fuzzyliteOutput = [
+            '#FuzzyLite Interactive Console (press H for help)',
+            '#@Engine: simple-dimmer;',
+            '#@InputVariable: Ambient;       @OutputVariable: Power;',
+            '>-0.5  0.1 =   0.212',
+        ].join('\n');
+        this.process.exec.yields(null, fuzzyliteOutput);
+        this.controllerInterface.runController([-0.5, 0.1],
+            function(err, result) {
+                assertFloatEqual(result, 0.212);
+                done();
+        });
+    });
+
+    it.skip('should handle negative inputs');
+    it.skip('should handle negative outputs');
 });
+
+function assertFloatEqual(actual, expected) {
+    assert(Math.abs(actual - expected) < 1e-5, 'expected ' + 0.212 + ', got ' + actual);
+}
