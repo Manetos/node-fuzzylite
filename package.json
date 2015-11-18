@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npm run build-fuzzylite",
+    "pretest": "npm run lint",
     "test": "mocha --reporter spec --recursive",
+    "lint": "jshint lib test",
     "test-watch": "mocha --recursive --invert --grep 'Integration' --watch --reporter min",
     "build-fuzzylite": "cd fuzzylite/fuzzylite && ./build.sh release"
   },
   "devDependencies": {
+    "jshint": "^2.9.1-rc1",
     "mocha": "^1.21.4"
   },
   "keywords": [
