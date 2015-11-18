@@ -69,6 +69,24 @@ describe('controller-interface', function() {
         });
     });
 
+    it('should return result as a number', function(done) {
+        this.process.exec.yields(null, '>0.1 0.2 = 0.3');
+        this.controllerInterface.runController([0.1, 0.2],
+            function(err, result) {
+                assert.equal(typeof result, 'number');
+                done();
+        });
+    });
+
+    it('should handle nan result', function(done) {
+        this.process.exec.yields(null, '>0.1 0.2 = nan');
+        this.controllerInterface.runController([0.5, 0.2],
+            function(err, result) {
+                assert(isNaN(result));
+                done();
+        });
+    });
+
     it.skip('should handle negative inputs');
     it.skip('should handle negative outputs');
 });
