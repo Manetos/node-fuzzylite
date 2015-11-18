@@ -40,4 +40,16 @@ describe('controller-interface', function() {
                 done();
         });
     });
+
+    it('should yield the result defined in the test', function(done) {
+        var self = this;
+        var expectedResult = '> 0.1 0.2 = 0.5';
+        this.process.exec.yields(null, expectedResult);
+        this.controllerInterface.runController([0.1, 0.2],
+            function(err, result) {
+                assert(self.process.exec.calledOnce);
+                assert(result, expectedResult);
+                done();
+        });
+    });
 });
