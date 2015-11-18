@@ -31,7 +31,7 @@ describe('controller-interface', function() {
         });
     });
 
-    it('should be called ones with valid input', function(done) {
+    it('should be called once with valid input', function(done) {
         var self = this;
         this.process.exec.yields(null, '_');
         this.controllerInterface.runController([0.1, 0.2],
@@ -41,7 +41,7 @@ describe('controller-interface', function() {
         });
     });
 
-    it('should yield the result defined in the test', function(done) {
+    it('should yield the result defined in this test', function(done) {
         var self = this;
         var expectedResult = '> 0.1 0.2 = 0.5';
         this.process.exec.yields(null, expectedResult);
