@@ -4,8 +4,10 @@
   "description": "A Node.js interface for the fuzzylite library",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npm run build-fuzzylite",
     "test": "mocha --reporter spec --recursive",
-    "test-watch": "mocha --recursive --invert --grep 'Integration' --watch --reporter min"
+    "test-watch": "mocha --recursive --invert --grep 'Integration' --watch --reporter min",
+    "build-fuzzylite": "cd fuzzylite/fuzzylite && ./build.sh release"
   },
   "devDependencies": {
     "mocha": "^1.21.4"
