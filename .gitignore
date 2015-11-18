@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+*.swp
+*.tar
+*.tgz
+*.pyc
+xunit.xml
+config/local.*
+logs/
+build/
+config/version
+.tern*

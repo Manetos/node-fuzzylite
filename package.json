@@ -1,0 +1,20 @@
+{
+  "name": "node-fuzzylite",
+  "version": "0.0.0",
+  "description": "A Node.js interface for the fuzzylite library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec --recursive",
+    "test-watch": "mocha --recursive --invert --grep 'Integration' --watch --reporter min"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  },
+  "keywords": [
+    "fuzzy",
+    "fuzzylite",
+    "node"
+  ],
+  "author": "Scypho",
+  "license": "BSD-2-Clause"
+}
