@@ -87,8 +87,23 @@ describe('controller-interface', function() {
         });
     });
 
-    it.skip('should handle negative inputs');
-    it.skip('should handle negative outputs');
+    it('should handle negative inputs', function(done) {
+        this.process.exec.yields(null, '>-0.5 -0.2 = 0.2');
+        this.controllerInterface.runController([-0.5, -0.2],
+            function(err, result) {
+                assertFloatEqual(result, 0.2);
+                done();
+        });
+    });
+
+    it('should handle negative outputs', function(done) {
+        this.process.exec.yields(null, '>0.5 0.2 = -0.2');
+        this.controllerInterface.runController([0.5, 0.2],
+            function(err, result) {
+                assertFloatEqual(result, -0.2);
+                done();
+        });
+    });
 });
 
 function assertFloatEqual(actual, expected) {
