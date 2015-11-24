@@ -10,3 +10,4 @@ logs/
 build/
 config/version
 .tern*
+fuzzy-controller.fcl
