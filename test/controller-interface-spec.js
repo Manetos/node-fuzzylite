@@ -107,5 +107,5 @@ describe('controller-interface', function() {
 });
 
 function assertFloatEqual(actual, expected) {
-    assert(Math.abs(actual - expected) < 1e-5, 'expected ' + 0.212 + ', got ' + actual);
+    assert(Math.abs(actual - expected) < 1e-5, 'expected ' + expected + ', got ' + actual);
 }
