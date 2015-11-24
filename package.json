@@ -2,7 +2,7 @@
   "name": "node-fuzzylite",
   "version": "0.0.0",
   "description": "A Node.js interface for the fuzzylite library",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "preinstall": "npm run build-fuzzylite",
     "pretest": "npm run lint",
