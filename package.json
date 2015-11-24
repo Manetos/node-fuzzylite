@@ -1,5 +1,5 @@
 {
-  "name": "node-fuzzylite",
+  "name": "fuzzylite",
   "version": "0.0.0",
   "description": "A Node.js interface for the fuzzylite library",
   "main": "index.js",
