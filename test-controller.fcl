@@ -2,6 +2,7 @@ FUNCTION_BLOCK simple-dimmer
 
 VAR_INPUT
   Ambient: REAL;
+  ElectricityCost: REAL;
 END_VAR
 
 VAR_OUTPUT
@@ -10,9 +11,16 @@ END_VAR
 
 FUZZIFY Ambient
   RANGE := (0.000 .. 1.000);
-  TERM DARK := Triangle 0.000 0.250 0.500;
+  TERM DARK := Trapezoid 0.000 0.000 0.250 0.500;
   TERM MEDIUM := Triangle 0.250 0.500 0.750;
-  TERM BRIGHT := Triangle 0.500 0.750 1.000;
+  TERM BRIGHT := Trapezoid 0.500 0.750 1.000 1.000;
+END_FUZZIFY
+
+FUZZIFY ElectricityCost
+  RANGE := (1.000 .. 5.000);
+  TERM LOW := Trapezoid 1.000 0.000 2.000 3.000;
+  TERM MEDIUM := Triangle 2.000 3.000 4.000;
+  TERM HIGH := Trapezoid 3.000 4.000 5.000 5.000;
 END_FUZZIFY
 
 DEFUZZIFY Power
@@ -26,10 +34,13 @@ DEFUZZIFY Power
 END_DEFUZZIFY
 
 RULEBLOCK
+  AND : MIN;
+  OR : MAX;
   ACT : MIN;
-  RULE 1 : if Ambient is DARK then Power is HIGH
-  RULE 2 : if Ambient is MEDIUM then Power is MEDIUM
-  RULE 3 : if Ambient is BRIGHT then Power is LOW
+  RULE 1 : if Ambient is MEDIUM then Power is MEDIUM
+  RULE 2 : if Ambient is BRIGHT then Power is LOW
+  RULE 3 : if Ambient is not DARK and ElectricityCost is HIGH then Power is LOW
+  RULE 4 : if Ambient is DARK then Power is HIGH
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
