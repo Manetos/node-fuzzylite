@@ -1,2 +1,1 @@
-fuzzylite/fuzzylite/*
-!fuzzylite/fuzzylite/release/bin/*
+fuzzylite/fuzzylite/release/*
