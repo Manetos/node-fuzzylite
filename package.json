@@ -12,6 +12,9 @@
     "test-watch": "mocha --recursive --invert --grep 'Integration' --watch --reporter min",
     "build-fuzzylite": "cd fuzzylite/fuzzylite && ./build.sh release"
   },
+  "dependencies": {
+    "debug": "^2.2.0"
+  },
   "devDependencies": {
     "jshint": "^2.9.1-rc1",
     "mocha": "^1.21.4",
@@ -25,7 +28,8 @@
   ],
   "author": "Scypho",
   "license": "Apache-2.0",
-  "dependencies": {
-    "debug": "^2.2.0"
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/Scypho/node-fuzzylite"
   }
 }
