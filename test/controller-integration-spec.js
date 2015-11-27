@@ -6,7 +6,6 @@ var ControllerInterface = require('../lib/controller-interface');
 describe('controller-interface', function() {
     beforeEach(function() {
         this.controllerInterface = new ControllerInterface(
-            './fuzzylite/fuzzylite/release/bin/fuzzylite',
             './test-controller.fcl');
     });
 
