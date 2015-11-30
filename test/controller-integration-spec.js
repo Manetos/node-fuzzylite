@@ -12,6 +12,7 @@ describe('controller-interface', function() {
     it('it should give an expected output on input', function(done) {
         this.controllerInterface.runController([-0.4, 3.1],
             function(err, result) {
+                assert.ifError(err);
                 assertFloatEqual(result, 0.5);
                 done();
         });
@@ -20,6 +21,7 @@ describe('controller-interface', function() {
     it('it should give an expected output on input', function(done) {
         this.controllerInterface.runController([0.2, 1.1],
             function(err, result) {
+                assert.ifError(err);
                 assertFloatEqual(result, 1.5);
                 done();
         });
