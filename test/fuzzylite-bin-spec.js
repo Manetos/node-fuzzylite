@@ -1,7 +1,6 @@
 'use strict';
 
 var assert = require('assert');
-var path = require('path');
 var util = require('util');
 
 var proxyquire = require('proxyquire');

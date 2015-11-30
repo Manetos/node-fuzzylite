@@ -31,7 +31,7 @@ describe('controller-interface', function() {
 
     it('should call exec once given valid input', function(done) {
         var self = this;
-        this.binary.binary.yields(null, '_');
+        this.binary.exec.yields(null, '_');
         this.controllerInterface.runController([0.1, 0.2],
             function() {
                 assert(self.binary.exec.calledOnce);
