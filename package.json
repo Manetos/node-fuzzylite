@@ -1,6 +1,6 @@
 {
   "name": "fuzzylite",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "A Node.js interface for the fuzzylite library",
   "main": "lib/index.js",
   "scripts": {
@@ -28,7 +28,7 @@
   "author": "Scypho",
   "license": "Apache-2.0",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/Scypho/node-fuzzylite"
+    "type": "git",
+    "url": "https://github.com/Scypho/node-fuzzylite"
   }
 }
