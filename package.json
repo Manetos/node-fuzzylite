@@ -9,7 +9,7 @@
     "test": "mocha --reporter spec --recursive",
     "lint": "jshint lib test",
     "test-watch": "mocha --recursive --invert --grep 'Integration' --watch --reporter min",
-    "build-fuzzylite": "cd fuzzylite/fuzzylite && ./build.sh release"
+    "build-fuzzylite": "./build-fuzzylite.sh"
   },
   "dependencies": {
     "debug": "^2.2.0"
