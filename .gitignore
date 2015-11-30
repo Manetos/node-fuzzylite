@@ -11,3 +11,7 @@ build/
 config/version
 .tern*
 fuzzy-controller.fcl
+
+# Used for packaging (instead of maintaining a separate .npmignore)
+fuzzylite/**
+!fuzzylite/fuzzylite/release/bin/*
