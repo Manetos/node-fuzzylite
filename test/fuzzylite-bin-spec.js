@@ -54,7 +54,7 @@ describe('FuzzyliteBin', function() {
 
     describe('exec', function() {
         it('should call child_process.exec with correct arguments', function(done) {
-            child_process.exec.withArgs('fuzzylite --help').yields(null);
+            child_process.exec.withArgs('fuzzylite').yields(null);
             child_process.exec.yields();
             var bin = new FuzzyliteBin();
             bin.exec([1, 2], 'controller.fcl', function(err) {
