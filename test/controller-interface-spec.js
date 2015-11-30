@@ -6,15 +6,13 @@ var assert = require('assert');
 
 describe('controller-interface', function() {
     beforeEach(function() {
-        this.process = {
-            exec: sinon.stub().returns({
-                on: sinon.spy()
-            })
+        this.binary = {
+            exec: sinon.stub()
         };
 
         this.ControllerInterface = proxyquire.noCallThru()
         ('../lib/controller-interface', {
-            'child_process': this.process,
+            './fuzzylite-bin': sinon.stub().returns(this.binary)
         });
 
         this.controllerInterface = new this.ControllerInterface();
@@ -22,21 +20,21 @@ describe('controller-interface', function() {
 
     it('should give error on string input', function(done) {
         var self = this;
-        this.process.exec.yields(null, '_');
+        this.binary.exec.yields(null, '_');
         this.controllerInterface.runController(['string', 'input'],
             function(err) {
                 assert(err);
-                assert(!self.process.exec.called);
+                assert(!self.binary.exec.called);
                 done();
         });
     });
 
-    it('should be called once with valid input', function(done) {
+    it('should call exec once given valid input', function(done) {
         var self = this;
-        this.process.exec.yields(null, '_');
+        this.binary.binary.yields(null, '_');
         this.controllerInterface.runController([0.1, 0.2],
             function() {
-                assert(self.process.exec.calledOnce);
+                assert(self.binary.exec.calledOnce);
                 done();
         });
     });
@@ -44,10 +42,10 @@ describe('controller-interface', function() {
     it('should yield the result defined in this test', function(done) {
         var self = this;
         var expectedResult = '> 0.1 0.2 = 0.5';
-        this.process.exec.yields(null, expectedResult);
+        this.binary.exec.yields(null, expectedResult);
         this.controllerInterface.runController([0.1, 0.2],
             function(err, result) {
-                assert(self.process.exec.calledOnce);
+                assert(self.binary.exec.calledOnce);
                 // FIXME this should probably be assert.equal
                 assert(result, expectedResult);
                 done();
@@ -61,7 +59,7 @@ describe('controller-interface', function() {
             '#@InputVariable: Ambient;       @OutputVariable: Power;',
             '>-0.5  0.1 =   0.212',
         ].join('\n');
-        this.process.exec.yields(null, fuzzyliteOutput);
+        this.binary.exec.yields(null, fuzzyliteOutput);
         this.controllerInterface.runController([-0.5, 0.1],
             function(err, result) {
                 assertFloatEqual(result, 0.212);
@@ -70,7 +68,7 @@ describe('controller-interface', function() {
     });
 
     it('should return result as a number', function(done) {
-        this.process.exec.yields(null, '>0.1 0.2 = 0.3');
+        this.binary.exec.yields(null, '>0.1 0.2 = 0.3');
         this.controllerInterface.runController([0.1, 0.2],
             function(err, result) {
                 assert.equal(typeof result, 'number');
@@ -79,7 +77,7 @@ describe('controller-interface', function() {
     });
 
     it('should handle nan result', function(done) {
-        this.process.exec.yields(null, '>0.1 0.2 = nan');
+        this.binary.exec.yields(null, '>0.1 0.2 = nan');
         this.controllerInterface.runController([0.5, 0.2],
             function(err, result) {
                 assert(isNaN(result));
@@ -88,7 +86,7 @@ describe('controller-interface', function() {
     });
 
     it('should handle negative inputs', function(done) {
-        this.process.exec.yields(null, '>-0.5 -0.2 = 0.2');
+        this.binary.exec.yields(null, '>-0.5 -0.2 = 0.2');
         this.controllerInterface.runController([-0.5, -0.2],
             function(err, result) {
                 assertFloatEqual(result, 0.2);
@@ -97,7 +95,7 @@ describe('controller-interface', function() {
     });
 
     it('should handle negative outputs', function(done) {
-        this.process.exec.yields(null, '>0.5 0.2 = -0.2');
+        this.binary.exec.yields(null, '>0.5 0.2 = -0.2');
         this.controllerInterface.runController([0.5, 0.2],
             function(err, result) {
                 assertFloatEqual(result, -0.2);
