@@ -4,7 +4,6 @@
   "description": "A Node.js interface for the fuzzylite library",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "cd fuzzylite && git clean -x -f -d",
     "preinstall": "npm run build-fuzzylite",
     "pretest": "npm run lint",
     "test": "mocha --reporter spec --recursive",
