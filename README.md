@@ -8,7 +8,7 @@ At the moment it just uses the CLI.
 
 # Example usage
 
-```nodejs
+```javascript
 var Fuzzylite = require('fuzzylite');
 var fuzzylite = new Fuzzylite('./node_modules/fuzzylite/test-controller.fcl');
 
